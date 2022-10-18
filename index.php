@@ -6,8 +6,6 @@ if (empty($_SESSION['username'])) {
 }
 $petugas = $_SESSION['username'];
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
