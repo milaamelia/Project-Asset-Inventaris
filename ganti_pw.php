@@ -1,10 +1,23 @@
+<?php
+session_start();
+include "config/koneksi.php";
+
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION['username'];
+  $akses = $_SESSION['akses'];
+} else {
+  header("location: ../login.php");
+}
+$session_id = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ibazaar</title>
+  <title>Asset Inventaris</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -32,7 +45,7 @@
 <body class="hold-transition register-page">
   <div class="register-box">
     <div class="register-logo">
-      <a href=""><b>Ibazaar</b>ابازاار</a>
+      <a href=""><b>Asset Inventaris</b></a>
     </div>
 
     <div class="register-box-body">
@@ -40,7 +53,7 @@
 
       <form name="myform" action="" onsubmit="return validateForm()" method="post">
         <div class="form-group has-feedback">
-          <input type="text" name="username" class="form-control" placeholder="Username">
+          <input type="text" name="username" value="<?php echo $username ?>" class="form-control" readonly placeholder="Username">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
@@ -74,33 +87,34 @@
   </div>
   <!-- /.proses-->
 
-  <!-->
-<?php
-include "config/koneksi.php";
+  <!---->
+  <?php
+  include "config/koneksi.php";
 
-if (isset($_POST['simpan'])) { //simpan baran
-  $username = $_POST['username'];
-  $passwordlama = $_POST['passwordlama'];
-  $passwordbaru = $_POST['passwordbaru'];
-  $cekuser = "select * from login where username = '$username' and password ='$passwordlama'";
-  $querycekuser = mysqli_query($conn, $cekuser);
-  $count = mysqli_num_rows($querycekuser);
-  if ($count >= 1) {
-    $updatepassword = "update login set password = '$passwordbaru' where username ='$username'";
-    $updatequery = mysqli_query($conn, $updatepassword);
-    if ($updatequery) {
-      echo "<script>alert('Password Berhasil diganti')</script>";
+  if (isset($_POST['simpan'])) { //simpan baran
+    $username = $_POST['username'];
+    $passwordlama = $_POST['passwordlama'];
+    $passwordbaru = $_POST['passwordbaru'];
+    $cekuser = "select * from login where username = '$username' and password ='$passwordlama'";
+    $querycekuser = mysqli_query($conn, $cekuser);
+    $count = mysqli_num_rows($querycekuser);
+    if ($count >= 1) {
+      $updatepassword = "update login set password = '$passwordbaru' where username ='$username'";
+      $updatequery = mysqli_query($conn, $updatepassword);
+      if ($updatequery) {
+        echo "<script>alert('Password Berhasil diganti')</script>";
+        "Password telah diganti menjadi $passwordbaru";
 
-      "Password telah diganti menjadi $passwordbaru";
+        echo "<script>location=('index.php');</script>";
+      }
     }
   }
-}
 
 
-?>
+  ?>
 
 
-<!-- jQuery 3 -->
+  <!-- jQuery 3 -->
   <!-- Bootstrap 3.3.7 -->
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- Slimscroll -->
@@ -125,7 +139,7 @@ if (isset($_POST['simpan'])) { //simpan baran
   </script>
   <script>
     jQuery(document).ready(function() {
-      jQuery(“#formID”).validationEngine();
+      jQuery("#formID").validationEngine();
     });
   </script>
   <script>

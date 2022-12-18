@@ -102,7 +102,7 @@ include "header.php";
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 															<span aria-hidden="true">&times;</span></button>
-														<img src="../image/buildings.png" class="img-circle" alt="User Image" style="margin-right:0;">
+														<img src="../image/png.png" class="img-circle" alt="User Image" style="margin-right:0;">
 														<h4 class="modal-title">Edit Kota</h4>
 														<form action="proses.php" role="form" method="POST">
 															<div class="modal-body">

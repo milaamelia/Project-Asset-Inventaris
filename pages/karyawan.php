@@ -145,7 +145,7 @@ include "header.php";
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="jenis-kelamin">Jenis Kelamin</label>
-                                                                        <select id="jenis-kelamin" name="jenis-kelamin" class="form-control">
+                                                                        <select id="jenis-kelamin" name="jenis-kelamin" class="form-control" required>
                                                                             <option value="">Pilih Jenis Kelamin</option>
                                                                             <option value="Perempuan">Perempuan</option>
                                                                             <option value="Laki-Laki">Laki-Laki</option>
@@ -153,7 +153,7 @@ include "header.php";
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="status-karyawan">Status Karyawan</label>
-                                                                        <select id="status-karyawan" name="status-karyawan" class="form-control">
+                                                                        <select id="status-karyawan" name="status-karyawan" class="form-control" required>
                                                                             <option value="">Pilih Status Karyawan</option>
                                                                             <option value="Karyawan Tetap">Karyawan Tetap</option>
                                                                             <option value="Karyawan Kontrak">Karyawan Kontrak</option>
@@ -161,7 +161,7 @@ include "header.php";
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>Alamat</label>
-                                                                        <textarea class="form-control" rows="3" name="alamat" value="<?php echo $data['alamat']; ?>"></textarea>
+                                                                        <textarea class="form-control" rows="3" name="alamat" value="<?php echo $data['alamat']; ?>" required></textarea>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="email">Email</label>
@@ -239,7 +239,7 @@ include "header.php";
                             </div>
                             <div class="form-group">
                                 <label for="jenis-kelamin">Jenis Kelamin</label>
-                                <select id="jenis-kelamin" name="jenis-kelamin" class="form-control">
+                                <select id="jenis-kelamin" name="jenis-kelamin" class="form-control" required>
                                     <option value="">Pilih Jenis Kelamin</option>
                                     <option value="Perempuan">Perempuan</option>
                                     <option value="Laki-Laki">Laki-Laki</option>
@@ -247,7 +247,7 @@ include "header.php";
                             </div>
                             <div class="form-group">
                                 <label for="status-karyawan">Status Karyawan</label>
-                                <select id="status-karyawan" name="status-karyawan" class="form-control">
+                                <select id="status-karyawan" name="status-karyawan" class="form-control" required>
                                     <option value="">Pilih Status Karyawan</option>
                                     <option value="Karyawan Tetap">Karyawan Tetap</option>
                                     <option value="Karyawan Kontrak">Karyawan Kontrak</option>
@@ -255,11 +255,11 @@ include "header.php";
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
-                                <textarea class="form-control" rows="3" name="alamat" placeholder="Alamat ..."></textarea>
+                                <textarea class="form-control" rows="3" name="alamat" placeholder="Alamat ..." required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input class="form-control" type="text" name="email" placeholder="name@example.com"></textarea>
+                                <input class="form-control" type="text" name="email" placeholder="name@example.com" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="no-tlp">No.Tlp</label>

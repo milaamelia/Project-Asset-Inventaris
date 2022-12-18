@@ -64,7 +64,7 @@ if (empty($_SESSION['username'])) {
               <div class="icon">
                 <i class="fa fa-cubes"></i>
               </div>
-              <a href="../mila.js/index.php" class="small-box-footer">
+              <a href="" class="small-box-footer">
                 Data Barang <i class="fa fa-cubes"></i>
               </a>
             </div>
@@ -73,7 +73,14 @@ if (empty($_SESSION['username'])) {
             <!-- small box -->
             <div class="small-box bg-red">
               <div class="inner">
-                <h3>4</h3>
+                <h3>
+                  <?php
+                  include '../config/koneksi.php';
+                  $query = "select count(*) jumlah_pinjam from inventaris_asset Where status_inventaris = 'Di Pinjam' ";
+                  $sql = mysqli_query($conn, $query);
+                  $tampil = mysqli_fetch_assoc($sql);
+                  echo $tampil['jumlah_pinjam']; ?>
+                </h3>
                 <p>Data Peminjam
               </div>
               <div class="icon">
@@ -89,14 +96,22 @@ if (empty($_SESSION['username'])) {
             <!-- small box -->
             <div class="small-box bg-yellow">
               <div class="inner">
-                <h3>4<sup style="font-size: 20px"></sup></h3>
-
+                <h3>
+                  <h3>
+                    <?php
+                    include '../config/koneksi.php';
+                    $query = "select count(*) jumlah_pinjam from inventaris_asset Where status_inventaris = 'Di Kembalikan' ";
+                    $sql = mysqli_query($conn, $query);
+                    $tampil = mysqli_fetch_assoc($sql);
+                    echo $tampil['jumlah_pinjam']; ?>
+                  </h3>
+                </h3>
                 <p>Data Pengembalian</p>
               </div>
               <div class="icon">
                 <i class=" fa fa-arrow-down"></i>
               </div>
-              <a href="../mila.js/diagrammasuk.php" class="small-box-footer">
+              <a href="" class="small-box-footer">
                 Data Pengembalian <i class="fa fa-arrow-down"></i>
               </a>
             </div>

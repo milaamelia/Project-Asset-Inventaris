@@ -53,7 +53,7 @@ if (isset($_SESSION['username'])) {
   </div>
   <div class="login-box">
     <div class="login-logo">
-      <center><img src="image/logo.png" class="" style="height:100px; box-shadow: 0px 0px 0px  rgba(0,0,0,0.0);"></center>
+      <center><img src="image/logo.png" class="" style="height:200px; box-shadow: 0px 0px 0px  rgba(0,0,0,0.0);"></center>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -67,6 +67,14 @@ if (isset($_SESSION['username'])) {
         <div class="form-group has-feedback">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <select id="level" name="level" class="form-control" required>
+            <option value="">Pilih Level</option>
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="Ketua Yayasan">Ketua Yayasan</option>
+          </select>
         </div>
         <div class="row">
           <div class="col-xs-8">

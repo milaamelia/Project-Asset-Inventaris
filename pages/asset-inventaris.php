@@ -52,7 +52,6 @@ include "header.php";
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Kode Inventaris</th>
                                     <th>SN Inventaris</th>
                                     <th>Jenis Barang</th>
@@ -65,6 +64,7 @@ include "header.php";
                                     <th>Tanggal Pinjam</th>
                                     <th>Tanggal Kembali</th>
                                     <th>Keterangan</th>
+                                    <th>Status Inventaris</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -76,7 +76,7 @@ include "header.php";
                                 $tampil = " Select a.id,a.kode_inventaris, a.sn_inventaris, c.nama_jenis, b.nama_barang,
                                                 f.nama_karyawan As karyawan_user, g.nama_karyawan As karyawan_pic,
                                                 e.nama_divisi, d.nama_kota, a.status,a.tgl_pinjam, a.tgl_kembali,
-                                                a.keterangan
+                                                a.keterangan, a.status_inventaris
                                             From inventaris_asset a 
                                             Join barang b on a.id_barang = b.id
                                             Join tb_jenis c On a.id_jenis = c.kode_jenis
@@ -89,7 +89,6 @@ include "header.php";
                                 while ($data = mysqli_fetch_assoc($hasil)) :
                                 ?>
                                     <tr>
-                                        <td><?php echo $data['id']; ?></td>
                                         <td><?php echo $data['kode_inventaris']; ?></td>
                                         <td><?php echo $data['sn_inventaris']; ?></td>
                                         <td><?php echo $data['nama_jenis']; ?></td>
@@ -102,10 +101,14 @@ include "header.php";
                                         <td><?php echo $data['tgl_pinjam']; ?></td>
                                         <td><?php echo $data['tgl_kembali']; ?></td>
                                         <td><?php echo $data['keterangan']; ?></td>
+                                        <td><?php echo $data['status_inventaris']; ?></td>
                                         <td>
                                             <button type="button" title="Update" class="btn btn-info" data-toggle="modal" data-target="#edit_asset<?php echo $data['id']; ?>">
                                                 <i class='glyphicon glyphicon-edit'></i>
                                             </button>
+                                            <a href="proses.php?pengembalian_asset=<?php echo $data['id']; ?>" name="pengembalian_asset" title="Pengembalian Data Asset" class="btn btn-warning" onclick="return confirm('You are sure?');">
+                                                <i class='fa fa-arrow-down'></i>
+                                            </a>
                                             <a href="proses.php?hapus_asset=<?php echo $data['id']; ?>" name="hapus_asset" title="Delete" class="btn btn-danger" onclick="return confirm('You are sure?');">
                                                 <i class='glyphicon glyphicon-trash'></i>
                                             </a>
@@ -215,7 +218,7 @@ include "header.php";
                                                                                     <div class="input-group-addon">
                                                                                         <i class="fa fa-calendar"></i>
                                                                                     </div>
-                                                                                    <input type="date" name="tgl-pinjam" value="<?php echo $data['tgl_pinjam']; ?>" class="form-control pull-right" id="datepicker">
+                                                                                    <input type="date" name="tgl-pinjam" value="<?php echo $data['tgl_pinjam']; ?>" class="form-control pull-right" id="datepicker" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group col-md-6">
@@ -224,17 +227,17 @@ include "header.php";
                                                                                     <div class="input-group-addon">
                                                                                         <i class="fa fa-calendar"></i>
                                                                                     </div>
-                                                                                    <input type="date" name="tgl-kembali" value="<?php echo $data['tgl_kembali']; ?>" class="form-control pull-right" id="datepicker">
+                                                                                    <input type="date" name="tgl-kembali" value="<?php echo $data['tgl_kembali']; ?>" class="form-control pull-right" id="datepicker" required>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="status">Status</label>
-                                                                            <input class="form-control" type="text" value="<?php echo $data['status']; ?>" name="status"></textarea>
+                                                                            <input class="form-control" type="text" value="<?php echo $data['status']; ?>" name="status" required></textarea>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label>Keterangan</label>
-                                                                            <textarea class="form-control" rows="3" name="keterangan" value="<?php echo $data['keterangan']; ?>"></textarea>
+                                                                            <textarea class="form-control" rows="3" name="keterangan" value="<?php echo $data['keterangan']; ?>" required></textarea>
                                                                         </div>
 
                                                                         <div class="modal-footer">
@@ -364,7 +367,7 @@ include "header.php";
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="date" name="tgl-pinjam" class="form-control pull-right" id="datepicker">
+                                        <input type="date" name="tgl-pinjam" class="form-control pull-right" id="datepicker" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -373,17 +376,17 @@ include "header.php";
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="date" name="tgl-kembali" class="form-control pull-right" id="datepicker">
+                                        <input type="date" name="tgl-kembali" class="form-control pull-right" id="datepicker" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <input class="form-control" type="text" name="status" placeholder="Status"></textarea>
+                                <input class="form-control" type="text" name="status" placeholder="Status" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea class="form-control" rows="3" name="keterangan" placeholder="Keterangan..."></textarea>
+                                <textarea class="form-control" rows="3" name="keterangan" placeholder="Keterangan..." required></textarea>
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ include "../config/koneksi.php";
 
 if (isset($_SESSION['username'])) {
   $username = $_SESSION['username'];
+  $akses = $_SESSION['level'];
 } else {
   header("location: ../login.php");
 }
@@ -165,6 +166,11 @@ $session_id = $_SESSION['username'];
             <ul class="treeview-menu">
               <li class="active"><a href="index.php"><i class="fa fa-circle-o"></i> Home</a></li>
             </ul>
+
+            <?php
+            // cek level user apakah admin atau bukan
+            if ($_SESSION['level'] == "Admin") {
+            ?>
           <li class="treeview">
             <a href="#">
               <i class="fa  fa-dropbox"></i> <span>Master</span>
@@ -196,7 +202,18 @@ $session_id = $_SESSION['username'];
               <i class="fa fa-users"></i> <span>Karyawan</span>
             </a>
           </li>
+        <?php
+            } else if ($_SESSION['level'] == "Manager" || $_SESSION['level'] == "Ketua Yayasan") {
+        ?>
+          <li class="active">
+            <a href="laporan-asset-inventaris.php">
+              <i class=" fa fa-file-text-o"></i> <span>Report Inventaris Asset </span>
+            </a>
           </li>
+        <?php
+            }
+        ?>
+        </li>
         </ul>
       </section>
       <!-- /.sidebar -->

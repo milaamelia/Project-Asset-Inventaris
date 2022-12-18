@@ -1,15 +1,3 @@
-   <?php
-    session_start();
-    include "../config/koneksi.php";
-
-    if (isset($_SESSION['username'])) {
-      $username = $_SESSION['username'];
-    } else {
-      header("location: ../login.php");
-    }
-    $session_id = $_SESSION['username'];
-    ?>
-
 <?php
 include "../config/koneksi.php";
 
@@ -158,7 +146,7 @@ if (isset($_POST['simpan_jenis'])) { //simpan jenis
   $query_update = "UPDATE barang SET nama_barang = '$nm', unit = '$unit_barang', harga_barang = '$harga_barang' WHERE id = '$kd'";
   $sql_update = mysqli_query($conn, $query_update);
   if ($sql_update) {
-    echo "<script> location=('jabatan.php');</script>";
+    echo "<script> location=('barang.php');</script>";
   } else {
     echo "Error: " . $query_update;
     die();
@@ -232,7 +220,7 @@ if (isset($_POST['simpan_jenis'])) { //simpan jenis
   $ket = $_POST['keterangan'];
   $tglpinjam = date("Y-m-d", strtotime($tgl_pinjam));
   $tglkembali = date("Y-m-d", strtotime($tgl_kembali));
-  $query = "INSERT INTO inventaris_asset VALUES (null,'$kode_inventaris','$sn_inventaris','$user','$pic','$barang','$jenis','$status','$tglpinjam','$tglkembali','$lokasi','$divisi','$ket')";
+  $query = "INSERT INTO inventaris_asset VALUES (null,'$kode_inventaris','$sn_inventaris','$user','$pic','$barang','$jenis','$status','$tglpinjam','$tglkembali','$lokasi','$divisi','$ket','Di Pinjam')";
   $sql = mysqli_query($conn, $query);
   if ($sql) {
     echo "<script>location=('asset-inventaris.php')</script>";
@@ -272,9 +260,13 @@ if (isset($_POST['simpan_jenis'])) { //simpan jenis
     echo "Error: " . $query;
     die();
   }
+} else if (isset($_GET['pengembalian_asset'])) { //Hapus Asset
+  $query = "UPDATE inventaris_asset set status_inventaris = 'Di Kembalikan' where id= '$_GET[pengembalian_asset]' ";
+  $sql = mysqli_query($conn, $query);
+  if ($sql) {
+    echo "<script>location=('asset-inventaris.php');</script>";
+  } else {
+    echo "Error: " . $query;
+    die();
+  }
 }
-
-?>
-
-
-
